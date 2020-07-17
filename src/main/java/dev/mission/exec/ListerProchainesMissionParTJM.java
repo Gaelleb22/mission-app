@@ -2,7 +2,9 @@ package dev.mission.exec;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 
@@ -25,7 +27,10 @@ public class ListerProchainesMissionParTJM implements Runnable{
 
 	@Override
 	public void run() {
-		List<Mission> missions = missionRepository.findProchainesMissionParTJM(new BigDecimal("120.00"));
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("Saisissez un taux journalier");
+		List<Mission> missions = missionRepository.findProchainesMissionParTJM(new BigDecimal(scanner.next()));
 		
 		for(Mission mission : missions) {
 			System.out.println(mission.getLibelle()+" : "+mission.getDateDebut()+" - "+mission.getDateFin()+", taux journalier : "+mission.getTauxJournalier());
